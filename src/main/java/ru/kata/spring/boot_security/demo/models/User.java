@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,10 +16,10 @@ public class User implements UserDetails {
     private int id;
 
     @Column
-    private String name;
+    private String username;
 
     @Column
-    private String surname;
+    private String email;
 
     @Column
     private int age;
@@ -37,9 +36,9 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String surname, int age, String password, Set<Role> roles) {
-        this.name = name;
-        this.surname = surname;
+    public User(String username, String email, int age, String password, Set<Role> roles) {
+        this.username = username;
+        this.email = email;
         this.age = age;
         this.password = password;
         this.roles = roles;
@@ -53,20 +52,16 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {
@@ -101,7 +96,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getName();
+        return username;
     }
 
     @Override
@@ -128,8 +123,8 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", age=" + age +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
