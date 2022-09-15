@@ -19,10 +19,13 @@ public class User implements UserDetails {
     private String username;
 
     @Column
-    private String email;
+    private String name;
 
     @Column
-    private int age;
+    private String surname;
+
+    @Column
+    private String email;
 
     @Column
     private String password;
@@ -34,14 +37,6 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User() {
-    }
-
-    public User(String username, String email, int age, String password, Set<Role> roles) {
-        this.username = username;
-        this.email = email;
-        this.age = age;
-        this.password = password;
-        this.roles = roles;
     }
 
     public int getId() {
@@ -56,20 +51,28 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public void setPassword(String password) {
@@ -124,8 +127,9 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';

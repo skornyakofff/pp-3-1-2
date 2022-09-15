@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     @Override
-    public List<User> getAllUser() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserService{
         User updatedUser = userRepository.getById(user.getId());
         updatedUser.setUsername(user.getUsername());
         updatedUser.setEmail(user.getEmail());
-        updatedUser.setAge(user.getAge());
         updatedUser.setPassword(user.getPassword());
         updatedUser.setRoles(user.getRoles());
     }

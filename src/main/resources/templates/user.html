@@ -20,15 +20,17 @@
     <tr>
         <th th:width="120">ID</th>
         <th th:width="120">Username</th>
+        <th th:width="120">Name</th>
+        <th th:width="120">Surname</th>
         <th th:width="150">email</th>
-        <th th:width="100">Возраст</th>
     </tr>
     <tbody>
     <tr>
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
         <td th:text="${user.getEmail()}"></td>
-        <td th:text="${user.getAge()}"></td>
     </tr>
     </tbody>
 </table>

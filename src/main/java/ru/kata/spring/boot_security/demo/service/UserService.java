@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    List<User> getAllUser();
+    List<User> getAllUsers();
     User getUserById(int id);
     void saveUser(User user);
     void updateUser(User user);

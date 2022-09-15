@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <style>
+        table {
+            width: 50%;
+            border-spacing: 1px;
+        }
+        td, th {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<br>
+<h1>Список пользователей</h1>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Имя пользователя</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Электронна почта</th>
+        <th>Роли</th>
+        <th>Редактировать пользователя</th>
+        <th>Удалить пользователя</th>
+    </tr>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId()}"></td>
+        <td th:utext="${user.getUsername()}"></td>
+        <td th:utext="${user.getName()}"></td>
+        <td th:utext="${user.getSurname()}"></td>
+        <td th:utext="${user.getEmail()}"></td>
+        <td>
+            <span th:each="role : ${user.getRoles()}">
+                <span th:utext="${role.getName()}"></span>
+                <br>
+            </span>
+        </td>
+        <td>
+            <form th:action="@{admin/edit/{id}(id=${user.id})}" th:object="${user}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{admin/{id}(id=${user.id})}">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<button><a href="admin/new">Создать пользователя</a></button>
+</body>
+</html>
