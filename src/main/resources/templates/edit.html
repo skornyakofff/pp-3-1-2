@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить пользователя</title>
+</head>
+<body>
+<h2>Изменить пользователя</h2>
+<div>
+  <form th:method="PATCH" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
+    <fieldset>
+      <p>
+        <label for="username">Введите логин</label>
+        <input type="text" th:field="*{username}" id="username">
+        <br>
+        <label for="name">Введите имя пользователя</label>
+        <input type="text" th:field="*{name}" id="name">
+        <br>
+        <label for="surname">Введите Фамилию пользователя</label>
+        <input type="text" th:field="*{surname}" id="surname">
+        <br>
+        <label for="email">Введите электронную почту</label>
+        <input type="text" th:field="*{email}" id="email">
+        <br>
+        <label for="password">Введите пароль</label>
+        <input type="password" th:field="*{password}" id="password">
+        <br>
+        <label th:for="roles">Роль</label>
+        <select th:field="*{roles}" id="roles" required>
+          <option th:each="role : ${roles}" th:value="${role.id}" th:utext="${role.name}"></option>
+        </select>
+      </p>
+    </fieldset>
+    <br>
+    <button type="submit">Изменить данные</button>
+  </form>
+  <br>
+  <form th:action="@{/admin}">
+    <button type="submit">Назад к списку пользователей</button>
+  </form>
+</div>
+</body>
+</html>

@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService{
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void saveUser(User user) {
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
         userRepository.save(user);
     }
 
@@ -48,8 +50,10 @@ public class UserServiceImpl implements UserService{
     public void updateUser(User user) {
         User updatedUser = userRepository.getById(user.getId());
         updatedUser.setUsername(user.getUsername());
+        updatedUser.setName(user.getName());
+        updatedUser.setSurname(user.getSurname());
         updatedUser.setEmail(user.getEmail());
-        updatedUser.setPassword(user.getPassword());
+        updatedUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
         updatedUser.setRoles(user.getRoles());
     }
 

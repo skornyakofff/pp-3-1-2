@@ -40,9 +40,9 @@
         </label>
       </p>
       <p>
-        <label th:for="role">Роль</label>
+        <label th:for="roles">Роль</label>
         <label>
-          <select th:field="*{id}" required>
+          <select th:field="*{roles}" required>
             <option th:each="role : ${roles}" th:value="${role.id}" th:utext="${role.name}"></option>
           </select>
         </label>
