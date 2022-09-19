@@ -26,13 +26,11 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
     }
 
-    @Transactional
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @Transactional
     @Override
     public User getUserById(int id) {
         return userRepository.getById(id);
@@ -53,7 +51,9 @@ public class UserServiceImpl implements UserService{
         updatedUser.setName(user.getName());
         updatedUser.setSurname(user.getSurname());
         updatedUser.setEmail(user.getEmail());
-        updatedUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+        if (user.getPassword().compareTo("") != 0) {
+            updatedUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+        }
         updatedUser.setRoles(user.getRoles());
     }
 
@@ -63,7 +63,6 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
-    @Transactional
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
